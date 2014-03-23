@@ -25,6 +25,12 @@ typedef NS_ENUM(NSInteger, JBLineChartViewLineStyle){
 @protocol JBLineChartViewDelegate;
 @protocol JBLineChartViewDataSource;
 
+@interface JBLineChartPoint : NSObject
+
+@property (nonatomic, assign) CGPoint position;
+
+@end
+
 @interface JBLineChartView : JBChartView
 
 @property (nonatomic, weak) id<JBLineChartViewDelegate> delegate;
@@ -77,8 +83,16 @@ typedef NS_ENUM(NSInteger, JBLineChartViewLineStyle){
  *  @param horizontalIndex  The 0-based horizontal index of a selection point (left to right, x-axis).point.
  *  @param touchPoint       The touch point in relation to the chart's bounds (excludes footer and header).
  */
-- (void)lineChartView:(JBLineChartView *)lineChartView didSelectLineAtIndex:(NSUInteger)lineIndex horizontalIndex:(NSUInteger)horizontalIndex touchPoint:(CGPoint)touchPoint;
-- (void)lineChartView:(JBLineChartView *)lineChartView didSelectLineAtIndex:(NSUInteger)lineIndex horizontalIndex:(NSUInteger)horizontalIndex;
+- (void)lineChartView:(JBLineChartView *)lineChartView
+ didSelectLineAtIndex:(NSUInteger)lineIndex
+      horizontalIndex:(NSUInteger)horizontalIndex
+            dataPoint:(JBLineChartPoint *)dataPoint
+           touchPoint:(CGPoint)touchPoint;
+
+
+- (void)lineChartView:(JBLineChartView *)lineChartView
+ didSelectLineAtIndex:(NSUInteger)lineIndex
+      horizontalIndex:(NSUInteger)horizontalIndex;
 
 /**
  *  Occurs when selection ends by ending a touch event. For selection start events, see: didSelectChartAtIndex:

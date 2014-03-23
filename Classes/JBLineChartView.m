@@ -56,12 +56,6 @@ NSString * const kJBLineChartViewAnimationPathKey = @"path";
 
 @end
 
-@interface JBLineChartPoint : NSObject
-
-@property (nonatomic, assign) CGPoint position;
-
-@end
-
 @protocol JBLineChartLineViewDelegate;
 
 @interface JBLineChartLineView : UIView
@@ -526,11 +520,11 @@ NSString * const kJBLineChartViewAnimationPathKey = @"path";
     UITouch *touch = [touches anyObject];
     CGPoint touchPoint = [self clampPoint:[touch locationInView:self.lineView] toBounds:self.lineView.bounds padding:kJBLineChartLineViewEdgePadding];
 
-    if ([self.delegate respondsToSelector:@selector(lineChartView:didSelectLineAtIndex:horizontalIndex:touchPoint:)])
+    if ([self.delegate respondsToSelector:@selector(lineChartView:didSelectLineAtIndex:horizontalIndex:dataPoint:touchPoint:)])
     {
         NSUInteger lineIndex = self.lineView.selectedLineIndex != kJBLineChartLineViewUnselectedLineIndex ? self.lineView.selectedLineIndex : [self lineIndexForPoint:touchPoint];
         NSUInteger horizontalIndex = [self horizontalIndexForPoint:touchPoint indexClamp:JBLineChartHorizontalIndexClampNone lineData:[self.chartData objectAtIndex:lineIndex]];
-        [self.delegate lineChartView:self didSelectLineAtIndex:lineIndex horizontalIndex:horizontalIndex touchPoint:[touch locationInView:self]];
+        [self.delegate lineChartView:self didSelectLineAtIndex:lineIndex horizontalIndex:horizontalIndex dataPoint:self.chartData[lineIndex][horizontalIndex] touchPoint:[touch locationInView:self]];
     }
     
     if ([self.delegate respondsToSelector:@selector(lineChartView:didSelectLineAtIndex:horizontalIndex:)])
