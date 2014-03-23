@@ -36,6 +36,8 @@ typedef NS_ENUM(NSInteger, JBLineChartViewLineStyle){
 @property (nonatomic, weak) id<JBLineChartViewDelegate> delegate;
 @property (nonatomic, weak) id<JBLineChartViewDataSource> dataSource;
 
+@property (nonatomic, readonly) NSArray *chartData;
+
 /**
  *  Vertical highlight overlayed on a line graph during touch events.
  *
@@ -86,7 +88,6 @@ typedef NS_ENUM(NSInteger, JBLineChartViewLineStyle){
 - (void)lineChartView:(JBLineChartView *)lineChartView
  didSelectLineAtIndex:(NSUInteger)lineIndex
       horizontalIndex:(NSUInteger)horizontalIndex
-            dataPoint:(JBLineChartPoint *)dataPoint
            touchPoint:(CGPoint)touchPoint;
 
 
