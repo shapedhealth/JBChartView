@@ -54,6 +54,9 @@ typedef NS_ENUM(NSInteger, JBLineChartViewLineStyle){
  */
 @property (nonatomic, assign) BOOL showsLineSelection;
 
+- (CGPoint)drawnPointForLineIndex:(NSUInteger)lineIndex
+               andHorizontalIndex:(NSUInteger)horizontalIndex;
+
 @end
 
 @protocol JBLineChartViewDelegate <NSObject>

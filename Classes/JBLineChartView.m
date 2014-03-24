@@ -420,6 +420,12 @@ NSString * const kJBLineChartViewAnimationPathKey = @"path";
 
 #pragma mark - Touch Helpers
 
+- (CGPoint)drawnPointForLineIndex:(NSUInteger)lineIndex
+               andHorizontalIndex:(NSUInteger)horizontalIndex {
+    CGPoint position = ((JBLineChartPoint *)self.chartData[lineIndex][horizontalIndex]).position;
+    return CGPointMake(position.x, fmin(self.bounds.size.height - kJBLineChartLineViewEdgePadding, fmax(kJBLineChartLineViewEdgePadding, position.y)) + self.headerPadding);
+}
+
 - (CGPoint)clampPoint:(CGPoint)point toBounds:(CGRect)bounds padding:(CGFloat)padding
 {
     return CGPointMake(MIN(MAX(bounds.origin.x + padding, point.x), bounds.size.width - padding),
